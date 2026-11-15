@@ -1,0 +1,357 @@
+/// Службова таблиця для всіх мір звіту
+table _Міри
+	lineageTag: 5b38f20a-6330-49fd-88dd-5a21b6303386
+
+	/// Нетто-продажі після знижки, усі статуси замовлень
+	measure Продажі = SUM ( 'fЗамовлення'[NetSales] )
+		formatString: $#,0
+		displayFolder: Продажі
+		lineageTag: db149b87-2665-45f0-bfe8-e898ba8e2286
+
+	/// Продажі до знижки
+	measure 'Продажі брутто' = SUM ( 'fЗамовлення'[GrossSales] )
+		formatString: $#,0
+		displayFolder: Продажі
+		lineageTag: 7518610d-bb75-411e-912c-3d04c7eb07bf
+
+	/// Сума наданих знижок
+	measure Знижки = SUM ( 'fЗамовлення'[Discount] )
+		formatString: $#,0
+		displayFolder: Продажі
+		lineageTag: ec9e273a-7b9e-4fd1-a66e-a68885215843
+
+	/// Знижки / продажі брутто
+	measure '% знижки' = DIVIDE ( [Знижки], [Продажі брутто] )
+		formatString: 0.0%
+		displayFolder: Продажі
+		lineageTag: e15565be-9f0d-4674-9f8e-e2bc85c3292c
+
+	/// Прибуток за позиціями замовлень
+	measure Прибуток = SUM ( 'fЗамовлення'[Profit] )
+		formatString: $#,0
+		displayFolder: Продажі
+		lineageTag: 43c2f73b-587b-4831-9501-057ae28535fa
+
+	/// Прибуток / нетто-продажі
+	measure 'Маржа %' = DIVIDE ( [Прибуток], [Продажі] )
+		formatString: 0.0%
+		displayFolder: Продажі
+		lineageTag: 3da6b1ab-4277-4a39-9c3e-faccba2f4250
+
+	/// Кількість унікальних замовлень
+	measure Замовлення = DISTINCTCOUNT ( 'fЗамовлення'[OrderId] )
+		formatString: #,0
+		displayFolder: Продажі
+		lineageTag: cd2c3273-7f27-430a-a981-a300b2b52635
+
+	/// Кількість позицій (рядків) замовлень
+	measure Позиції = COUNTROWS ( 'fЗамовлення' )
+		formatString: #,0
+		displayFolder: Продажі
+		lineageTag: 7245d545-cb9d-4f7f-a109-71a362109b4f
+
+	/// Продано одиниць товару
+	measure Одиниці = SUM ( 'fЗамовлення'[Quantity] )
+		formatString: #,0
+		displayFolder: Продажі
+		lineageTag: f58d49f0-315b-48be-867a-8bf1d1921c5f
+
+	/// Нетто-продажі на одне замовлення
+	measure 'Середній чек' = DIVIDE ( [Продажі], [Замовлення] )
+		formatString: $#,0.00
+		displayFolder: Продажі
+		lineageTag: 9fe465ae-0985-4bde-833c-d140a8e30ad6
+
+	/// Середня кількість одиниць у замовленні
+	measure 'Одиниць на замовлення' = DIVIDE ( [Одиниці], [Замовлення] )
+		formatString: 0.00
+		displayFolder: Продажі
+		lineageTag: d60aa22b-5a4b-4ecd-a014-fc733bbc440a
+
+	/// Продажі за той самий період минулого року. Використовувати з IsCorePeriod = 1
+	measure 'Продажі ПР' = CALCULATE ( [Продажі], SAMEPERIODLASTYEAR ( 'Календар'[Date] ) )
+		formatString: $#,0
+		displayFolder: Динаміка
+		lineageTag: 9f9e4a7d-e337-499c-b43d-b5cc6313c1fd
+
+	/// Зміна продажів рік до року. Використовувати з IsCorePeriod = 1
+	measure 'Продажі р/р %' = DIVIDE ( [Продажі] - [Продажі ПР], [Продажі ПР] )
+		formatString: +0.0%;-0.0%
+		displayFolder: Динаміка
+		lineageTag: 18d1422b-918e-4a1e-8551-c295e6f6bbf0
+
+	/// Прибуток за той самий період минулого року
+	measure 'Прибуток ПР' = CALCULATE ( [Прибуток], SAMEPERIODLASTYEAR ( 'Календар'[Date] ) )
+		formatString: $#,0
+		displayFolder: Динаміка
+		lineageTag: 008ffb8c-022b-4585-8370-55bb42696062
+
+	/// Зміна прибутку рік до року. Використовувати з IsCorePeriod = 1
+	measure 'Прибуток р/р %' = DIVIDE ( [Прибуток] - [Прибуток ПР], [Прибуток ПР] )
+		formatString: +0.0%;-0.0%
+		displayFolder: Динаміка
+		lineageTag: 3030b718-40c2-48b7-bfa9-088ad83ee5e7
+
+	/// Замовлення за той самий період минулого року
+	measure 'Замовлення ПР' = CALCULATE ( [Замовлення], SAMEPERIODLASTYEAR ( 'Календар'[Date] ) )
+		formatString: #,0
+		displayFolder: Динаміка
+		lineageTag: b97c23b0-4619-49de-b5c1-63509af6b8bc
+
+	/// Зміна кількості замовлень рік до року
+	measure 'Замовлення р/р %' = DIVIDE ( [Замовлення] - [Замовлення ПР], [Замовлення ПР] )
+		formatString: +0.0%;-0.0%
+		displayFolder: Динаміка
+		lineageTag: c805afaa-cae2-4912-a90b-6d3808e99608
+
+	/// Продажі з початку року
+	measure 'Продажі YTD' = TOTALYTD ( [Продажі], 'Календар'[Date] )
+		formatString: $#,0
+		displayFolder: Динаміка
+		lineageTag: 1b108e4b-8443-47d7-a020-bf87adbf3f57
+
+	/// Замовлення, які фактично відвантажені (без Shipping canceled)
+	measure 'Відвантажені замовлення' = CALCULATE ( [Замовлення], 'fЗамовлення'[IsShipped] = 1 )
+		formatString: #,0
+		displayFolder: Доставка
+		lineageTag: 1a81ceb1-ff85-49b4-b370-2c98d2c85b3d
+
+	/// Замовлення, доставлені пізніше плану
+	measure 'Запізнілі замовлення' = CALCULATE ( [Замовлення], 'fЗамовлення'[IsLate] = 1 )
+		formatString: #,0
+		displayFolder: Доставка
+		lineageTag: 7077f952-2ce0-42cc-9fe2-933e87aca57c
+
+	/// Запізнілі / відвантажені замовлення
+	measure '% запізнень' = DIVIDE ( [Запізнілі замовлення], [Відвантажені замовлення] )
+		formatString: 0.0%
+		displayFolder: Доставка
+		lineageTag: 4aef754a-80ab-4492-b220-1149448797f8
+
+	/// Замовлення, доставлені точно в плановий строк
+	measure 'Вчасні замовлення' = CALCULATE ( [Замовлення], 'fЗамовлення'[DeliveryStatus] = "Shipping on time" )
+		formatString: #,0
+		displayFolder: Доставка
+		lineageTag: f1497fca-9748-416c-8de6-c9d1b0045032
+
+	/// Замовлення, доставлені раніше плану
+	measure 'Дострокові замовлення' = CALCULATE ( [Замовлення], 'fЗамовлення'[DeliveryStatus] = "Advance shipping" )
+		formatString: #,0
+		displayFolder: Доставка
+		lineageTag: 7a361b42-ebf3-4aaf-bf67-282bb220102d
+
+	/// On-time delivery: вчасні + дострокові / відвантажені
+	measure '% вчасно (OTD)' = DIVIDE ( [Вчасні замовлення] + [Дострокові замовлення], [Відвантажені замовлення] )
+		formatString: 0.0%
+		displayFolder: Доставка
+		lineageTag: aeef800e-d62d-4ac1-83c1-9e5f33b02a54
+
+	/// Цільовий рівень вчасної доставки
+	measure 'Ціль OTD' = 0.90
+		formatString: 0%
+		displayFolder: Доставка
+		lineageTag: 8ad711c9-029d-4d7e-834b-ff5b240ad666
+
+	/// Різниця між фактичним OTD і ціллю
+	measure 'Відхилення від цілі OTD' = [% вчасно (OTD)] - [Ціль OTD]
+		formatString: +0.0%;-0.0%
+		displayFolder: Доставка
+		lineageTag: 6e11d6ea-6cf7-4ac2-9e4d-baf2c223e661
+
+	/// Середня фактична тривалість доставки по замовленнях, днів
+	measure 'Днів доставки факт' =
+			AVERAGEX (
+			    CALCULATETABLE ( VALUES ( 'fЗамовлення'[OrderId] ), 'fЗамовлення'[IsShipped] = 1 ),
+			    CALCULATE ( MAX ( 'fЗамовлення'[DaysReal] ) )
+			)
+		formatString: 0.00
+		displayFolder: Доставка
+		lineageTag: c4598b25-7ac0-45a0-bf26-969d9feb20e1
+
+	/// Середній плановий строк доставки по замовленнях, днів
+	measure 'Днів доставки план' =
+			AVERAGEX (
+			    CALCULATETABLE ( VALUES ( 'fЗамовлення'[OrderId] ), 'fЗамовлення'[IsShipped] = 1 ),
+			    CALCULATE ( MAX ( 'fЗамовлення'[DaysScheduled] ) )
+			)
+		formatString: 0.00
+		displayFolder: Доставка
+		lineageTag: d12e828c-870f-4018-afac-a36686e3e67d
+
+	/// Факт мінус план, днів (додатне = запізнення)
+	measure 'Відхилення днів' = [Днів доставки факт] - [Днів доставки план]
+		formatString: +0.00;-0.00
+		displayFolder: Доставка
+		lineageTag: 51c304ee-cbc4-41fd-a638-cc812a8bc92c
+
+	/// На скільки днів в середньому запізнюються запізнілі замовлення
+	measure 'Середнє запізнення, днів' =
+			AVERAGEX (
+			    CALCULATETABLE ( VALUES ( 'fЗамовлення'[OrderId] ), 'fЗамовлення'[IsLate] = 1 ),
+			    CALCULATE ( MAX ( 'fЗамовлення'[DelayDays] ) )
+			)
+		formatString: 0.00
+		displayFolder: Доставка
+		lineageTag: a497e526-e212-4463-8991-1989c6f1c82b
+
+	/// Продажі за запізнілими замовленнями
+	measure 'Продажі під ризиком' = CALCULATE ( [Продажі], 'fЗамовлення'[IsLate] = 1 )
+		formatString: $#,0
+		displayFolder: Доставка
+		lineageTag: 5893c8c8-15f8-4078-804a-a92b9e35cbf0
+
+	/// Кількість товарів із продажами
+	measure Товари = DISTINCTCOUNT ( 'fЗамовлення'[ProductId] )
+		formatString: #,0
+		displayFolder: Товари
+		lineageTag: 1e04d784-2ca7-40ba-a05e-6cfdac23ed6f
+
+	/// Частка в продажах усіх вибраних товарів
+	measure 'Частка продажів %' = DIVIDE ( [Продажі], CALCULATE ( [Продажі], ALLSELECTED ( 'дТовари' ) ) )
+		formatString: 0.0%
+		displayFolder: Товари
+		lineageTag: f8677939-71fc-45f6-ada6-64fff74ec007
+
+	/// Кумулятивна частка продажів для Парето від усіх товарів (ALL лише на ProductName: зрізи сторінки діють)
+	measure 'Кумулятивна частка %' =
+			VAR _cur = [Продажі]
+			VAR _all = ALL ( 'дТовари'[ProductName] )
+			RETURN
+			    DIVIDE (
+			        SUMX ( FILTER ( _all, [Продажі] >= _cur ), [Продажі] ),
+			        CALCULATE ( [Продажі], _all )
+			    )
+		formatString: 0.0%
+		displayFolder: Товари
+		lineageTag: a9f5e9ee-4793-45ec-b666-dcf51b01e319
+
+	/// Прибуток на одну продану одиницю
+	measure 'Прибуток на одиницю' = DIVIDE ( [Прибуток], [Одиниці] )
+		formatString: $#,0.00
+		displayFolder: Товари
+		lineageTag: 20b451a7-ab21-4503-bafd-fec25018303a
+
+	/// Кількість клієнтів із замовленнями
+	measure Клієнти = DISTINCTCOUNT ( 'fЗамовлення'[CustomerId] )
+		formatString: #,0
+		displayFolder: Клієнти
+		lineageTag: 7c19dfa0-a23c-42d9-875e-80a3674cac10
+
+	/// Нетто-продажі на одного клієнта
+	measure 'Продажі на клієнта' = DIVIDE ( [Продажі], [Клієнти] )
+		formatString: $#,0
+		displayFolder: Клієнти
+		lineageTag: 3e440226-08e5-4407-afc6-08a59b24f3a0
+
+	/// Середня кількість замовлень на клієнта
+	measure 'Замовлень на клієнта' = DIVIDE ( [Замовлення], [Клієнти] )
+		formatString: 0.00
+		displayFolder: Клієнти
+		lineageTag: e3e6317c-76fb-43ec-bdc3-fb0f0d6fbb97
+
+	/// Клієнти з більш ніж одним замовленням у вибраному періоді
+	measure 'Повторні клієнти' =
+			COUNTROWS (
+			    FILTER ( VALUES ( 'fЗамовлення'[CustomerId] ), CALCULATE ( DISTINCTCOUNT ( 'fЗамовлення'[OrderId] ) ) > 1 )
+			)
+		formatString: #,0
+		displayFolder: Клієнти
+		lineageTag: fa5ab834-cb8c-4e8b-be6b-5d4709a6660d
+
+	/// Частка клієнтів із повторними замовленнями
+	measure '% повторних клієнтів' = DIVIDE ( [Повторні клієнти], [Клієнти] )
+		formatString: 0.0%
+		displayFolder: Клієнти
+		lineageTag: 13829ad6-8ed2-4005-9239-191e67a756ad
+
+	/// Клієнти, чиє перше замовлення припадає на вибраний період
+	measure 'Нові клієнти' =
+			VAR _start = MIN ( 'Календар'[Date] )
+			VAR _end = MAX ( 'Календар'[Date] )
+			RETURN
+			    COUNTROWS (
+			        FILTER (
+			            VALUES ( 'fЗамовлення'[CustomerId] ),
+			            VAR _first = CALCULATE ( MIN ( 'fЗамовлення'[OrderDate] ), ALL ( 'Календар' ) )
+			            RETURN _first >= _start && _first <= _end
+			        )
+			    )
+		formatString: #,0
+		displayFolder: Клієнти
+		lineageTag: 13a7cc2c-0e59-45be-a4ef-0e85830c0dea
+
+	/// Замовлення зі статусом SUSPECTED_FRAUD
+	measure 'Підозрілі замовлення' = CALCULATE ( [Замовлення], 'fЗамовлення'[IsFraud] = 1 )
+		formatString: #,0
+		displayFolder: Ризики
+		lineageTag: c484466a-5e2f-46a5-834d-edaeca8e838e
+
+	/// Частка підозрілих замовлень
+	measure '% підозрілих' = DIVIDE ( [Підозрілі замовлення] + 0, [Замовлення] )
+		formatString: 0.00%
+		displayFolder: Ризики
+		lineageTag: c35ed6e3-ab69-4446-adc4-dcb0bc5a89ee
+
+	/// Нетто-продажі за підозрілими замовленнями
+	measure 'Сума підозрілих' = CALCULATE ( [Продажі], 'fЗамовлення'[IsFraud] = 1 )
+		formatString: $#,0
+		displayFolder: Ризики
+		lineageTag: 576746e8-2045-4d3f-b92c-e374a381d4c0
+
+	/// Скасовані замовлення
+	measure 'Скасовані замовлення' = CALCULATE ( [Замовлення], 'fЗамовлення'[IsCanceled] = 1 )
+		formatString: #,0
+		displayFolder: Ризики
+		lineageTag: 7a5d1df8-8df8-4b7f-b0fb-25847c3edb1c
+
+	/// Частка скасованих замовлень
+	measure '% скасованих' = DIVIDE ( [Скасовані замовлення], [Замовлення] )
+		formatString: 0.00%
+		displayFolder: Ризики
+		lineageTag: 0b260e91-715d-4b39-8b6c-d5d6017d0803
+
+	/// Нетто-продажі за скасованими замовленнями
+	measure 'Сума скасованих' = CALCULATE ( [Продажі], 'fЗамовлення'[IsCanceled] = 1 )
+		formatString: $#,0
+		displayFolder: Ризики
+		lineageTag: 2b0836ee-9672-4c71-a356-14c6908daecd
+
+	/// Позиції замовлень з від'ємним прибутком
+	measure 'Збиткові позиції' = CALCULATE ( [Позиції], 'fЗамовлення'[Profit] < 0 )
+		formatString: #,0
+		displayFolder: Ризики
+		lineageTag: de32c56f-efbe-47c2-aa5f-0d94f7add935
+
+	/// Частка позицій зі збитком
+	measure '% збиткових позицій' = DIVIDE ( [Збиткові позиції], [Позиції] )
+		formatString: 0.0%
+		displayFolder: Ризики
+		lineageTag: bbb0946e-0344-4c49-8b3f-07dad11414f9
+
+	/// Сума від'ємного прибутку збиткових позицій
+	measure Збиток = CALCULATE ( [Прибуток], 'fЗамовлення'[Profit] < 0 )
+		formatString: $#,0
+		displayFolder: Ризики
+		lineageTag: 11861f42-5a3a-44fe-bee2-9b9d5c635d4c
+
+	/// Частка продажів, що припадає на запізнілі замовлення
+	measure 'Частка продажів під ризиком' = DIVIDE ( [Продажі під ризиком], [Продажі] )
+		formatString: 0.0%
+		displayFolder: Доставка
+		lineageTag: 441d2c01-8b13-4eed-888d-51bfd098face
+
+	column Службова
+		dataType: string
+		isHidden
+		lineageTag: 9d8d70a9-9771-4a1c-bc44-d7412a596944
+		summarizeBy: none
+		sourceColumn: Службова
+
+	partition _Міри = m
+		mode: import
+		source =
+				let
+				    Source = #table(type table [Службова = text], {})
+				in
+				    Source
+

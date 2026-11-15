@@ -1,0 +1,200 @@
+cultureInfo uk-UA
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "дгеографія.market": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "дГеографія",
+			          "ConceptualProperty": "Market"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Ринок": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "дклієнти.segment": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "дКлієнти",
+			          "ConceptualProperty": "Segment"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Сегмент": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "ддоставка.shipmode": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "дДоставка",
+			          "ConceptualProperty": "ShipMode"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Спосіб доставки": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "календар.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Календар",
+			          "ConceptualProperty": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Рік": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "дгеографія.orderregion": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "дГеографія",
+			          "ConceptualProperty": "OrderRegion"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Регіон": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_міри.товари": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Міри",
+			          "ConceptualProperty": "Товари"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "К-сть": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "table_міри.частка_продажів_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "_Міри",
+			          "ConceptualProperty": "Частка продажів %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Частка": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "дтовари.category": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "дТовари",
+			          "ConceptualProperty": "Category"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Категорія": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "дтовари.productname": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "дТовари",
+			          "ConceptualProperty": "ProductName"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Товар": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

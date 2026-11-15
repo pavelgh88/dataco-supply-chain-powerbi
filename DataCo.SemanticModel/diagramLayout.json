@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1704,
+            "y": 62
+          },
+          "nodeIndex": "дДоставка",
+          "nodeLineageTag": "e7267cdb-fc6c-46bb-9e98-0ba438ce2ecf",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 98
+          },
+          "nodeIndex": "_Міри",
+          "nodeLineageTag": "5b38f20a-6330-49fd-88dd-5a21b6303386",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 38
+          },
+          "nodeIndex": "дГеографія",
+          "nodeLineageTag": "a2c381f8-71f6-42f3-b1dd-cfe7236ed3ae",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 568,
+            "y": 14
+          },
+          "nodeIndex": "дКлієнти",
+          "nodeLineageTag": "328eec85-bac0-4b7b-a955-77be538bbe1d",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 2
+          },
+          "nodeIndex": "дТовари",
+          "nodeLineageTag": "30a65f82-c461-4b02-9ce3-20ac834349e2",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 0
+          },
+          "nodeIndex": "Календар",
+          "nodeLineageTag": "bc574be5-1332-4a54-8cd2-0fe1cbb00146",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1420,
+            "y": 0
+          },
+          "nodeIndex": "fЗамовлення",
+          "nodeLineageTag": "11719184-9833-47dc-bf7c-936e07433be5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Усі таблиці",
+      "zoomValue": 31.863081771035674,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Усі таблиці",
+  "defaultDiagram": "Усі таблиці"
+}

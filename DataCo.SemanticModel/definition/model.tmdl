@@ -1,0 +1,23 @@
+model Model
+	culture: uk-UA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: uk-UA
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table дДоставка
+ref table дТовари
+ref table дКлієнти
+ref table дГеографія
+ref table Календар
+ref table fЗамовлення
+ref table _Міри
+
+ref cultureInfo uk-UA
+

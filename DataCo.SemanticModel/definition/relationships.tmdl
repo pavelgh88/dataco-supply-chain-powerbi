@@ -1,0 +1,25 @@
+relationship fЗамовлення_OrderDate_Календар_Date
+	fromColumn: fЗамовлення.OrderDate
+	toColumn: Календар.Date
+
+relationship fЗамовлення_ShipDate_Календар_Date
+	isActive: false
+	fromColumn: fЗамовлення.ShipDate
+	toColumn: Календар.Date
+
+relationship fЗамовлення_ProductId_дТовари_ProductId
+	fromColumn: fЗамовлення.ProductId
+	toColumn: дТовари.ProductId
+
+relationship fЗамовлення_CustomerId_дКлієнти_CustomerId
+	fromColumn: fЗамовлення.CustomerId
+	toColumn: дКлієнти.CustomerId
+
+relationship fЗамовлення_GeoKey_дГеографія_GeoKey
+	fromColumn: fЗамовлення.GeoKey
+	toColumn: дГеографія.GeoKey
+
+relationship fЗамовлення_ShipModeKey_дДоставка_ShipModeKey
+	fromColumn: fЗамовлення.ShipModeKey
+	toColumn: дДоставка.ShipModeKey
+

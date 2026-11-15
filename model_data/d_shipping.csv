@@ -1,0 +1,5 @@
+﻿ShipModeKey,ShipMode,ScheduledDays,SortOrder
+1,Same Day,0,1
+2,First Class,1,2
+3,Second Class,2,3
+4,Standard Class,4,4

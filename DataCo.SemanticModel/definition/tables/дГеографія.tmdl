@@ -1,0 +1,74 @@
+/// Географія призначення замовлень
+table дГеографія
+	lineageTag: a2c381f8-71f6-42f3-b1dd-cfe7236ed3ae
+
+	column GeoKey
+		dataType: int64
+		lineageTag: 0a891f9c-8cb1-44bc-b4a6-b39ca6257629
+		summarizeBy: none
+		sourceColumn: GeoKey
+
+	column Market
+		dataType: string
+		lineageTag: a27797d0-671b-4783-b527-93fe2fc42918
+		summarizeBy: none
+		sourceColumn: Market
+
+	column OrderRegion
+		dataType: string
+		lineageTag: f7e5b053-9394-4676-b11d-ff4a25a3af83
+		summarizeBy: none
+		sourceColumn: OrderRegion
+
+	column OrderCountry
+		dataType: string
+		lineageTag: bcad8a24-ea38-44fb-bbfe-97ff960cb6c4
+		summarizeBy: none
+		sourceColumn: OrderCountry
+
+	column OrderState
+		dataType: string
+		lineageTag: 9e6f9455-fa21-4f90-80ac-d70c6b6d361c
+		summarizeBy: none
+		sourceColumn: OrderState
+
+	column OrderCity
+		dataType: string
+		lineageTag: b2e7b94b-3621-4608-991b-b9475e6ebdd9
+		summarizeBy: none
+		sourceColumn: OrderCity
+
+	/// Країна призначення англійською (для візуалів)
+	column OrderCountryEn
+		dataType: string
+		lineageTag: 5d83f87c-df8b-41b0-b4d7-c26fada6dcd1
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: OrderCountryEn
+
+	/// Market > OrderRegion > OrderCountry
+	hierarchy 'Географія замовлень'
+		lineageTag: 3e7ea422-ac02-4dbe-94bf-7e5b3604647a
+
+		level Market
+			lineageTag: ceb52a4e-617a-41b9-bb12-dcc903a7a9f8
+			column: Market
+
+		level OrderRegion
+			lineageTag: d5ab0e0b-3ea8-4387-83ad-117483d8a0e6
+			column: OrderRegion
+
+		level OrderCountry
+			lineageTag: 437c7f6e-f493-4907-82a4-d1ac848c3993
+			column: OrderCountry
+
+	partition дГеографія = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "d_geography.csv"), [Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"GeoKey", Int64.Type}, {"Market", type text}, {"OrderRegion", type text}, {"OrderCountry", type text}, {"OrderCountryEn", type text}, {"OrderState", type text}, {"OrderCity", type text}}, "en-US")
+				in
+				    Typed
+

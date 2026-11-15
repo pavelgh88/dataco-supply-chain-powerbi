@@ -1,0 +1,4 @@
+/// Папка з CSV-файлами моделі (model_data), зі слешем у кінці. Змініть на іншому ПК.
+expression DataFolder = "C:\Users\mac\Documents\Power BI MODEL\model_data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c03aa9f2-1651-412d-a51d-32d39a6abd46
+

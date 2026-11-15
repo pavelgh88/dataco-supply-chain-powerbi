@@ -1,0 +1,39 @@
+/// Довідник способів доставки
+table дДоставка
+	lineageTag: e7267cdb-fc6c-46bb-9e98-0ba438ce2ecf
+
+	column ShipModeKey
+		dataType: int64
+		lineageTag: c4c22c59-d98b-4e0e-a037-3cda0d8a7b3c
+		summarizeBy: none
+		sourceColumn: ShipModeKey
+
+	column ShipMode
+		dataType: string
+		lineageTag: 0c1d08ea-a538-402a-8fba-0fb6ce968b64
+		summarizeBy: none
+		sourceColumn: ShipMode
+		sortByColumn: SortOrder
+
+	column ScheduledDays
+		dataType: int64
+		lineageTag: f47edf91-b62f-452f-91b3-e1b5e5d3ed48
+		summarizeBy: none
+		sourceColumn: ScheduledDays
+
+	column SortOrder
+		dataType: int64
+		lineageTag: 25a9b0ca-4c08-4f3f-8b34-9c4f8255be2e
+		summarizeBy: none
+		sourceColumn: SortOrder
+
+	partition дДоставка = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "d_shipping.csv"), [Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"ShipModeKey", Int64.Type}, {"ShipMode", type text}, {"ScheduledDays", Int64.Type}, {"SortOrder", Int64.Type}}, "en-US")
+				in
+				    Typed
+

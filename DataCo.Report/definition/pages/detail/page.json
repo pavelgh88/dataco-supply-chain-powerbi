@@ -1,0 +1,106 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "detail",
+  "displayName": "Деталізація",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "drill_category",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "дТовари"
+              }
+            },
+            "Property": "Category"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "drill_orderregion",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "дГеографія"
+              }
+            },
+            "Property": "OrderRegion"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "drill_shipmode",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "дДоставка"
+              }
+            },
+            "Property": "ShipMode"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "detail_drillthrough",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "param_category",
+        "boundFilter": "drill_category",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "дТовари"
+              }
+            },
+            "Property": "Category"
+          }
+        }
+      },
+      {
+        "name": "param_orderregion",
+        "boundFilter": "drill_orderregion",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "дГеографія"
+              }
+            },
+            "Property": "OrderRegion"
+          }
+        }
+      },
+      {
+        "name": "param_shipmode",
+        "boundFilter": "drill_shipmode",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "дДоставка"
+              }
+            },
+            "Property": "ShipMode"
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode"
+}

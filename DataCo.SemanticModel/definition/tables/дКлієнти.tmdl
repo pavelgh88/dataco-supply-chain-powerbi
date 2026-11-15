@@ -1,0 +1,65 @@
+/// Довідник клієнтів
+table дКлієнти
+	lineageTag: 328eec85-bac0-4b7b-a955-77be538bbe1d
+
+	column CustomerId
+		dataType: int64
+		lineageTag: f1ad697f-acef-49af-87e6-d6fe176a481f
+		summarizeBy: none
+		sourceColumn: CustomerId
+
+	column Segment
+		dataType: string
+		lineageTag: a160cb12-3f86-463c-8f44-02623d338c72
+		summarizeBy: none
+		sourceColumn: Segment
+
+	column CustomerCity
+		dataType: string
+		lineageTag: 2bea3756-ac4b-46be-926b-c51f7c9ac96b
+		summarizeBy: none
+		sourceColumn: CustomerCity
+
+	column CustomerState
+		dataType: string
+		lineageTag: 2eb27d08-1684-4dd6-bc34-5f692e0e0959
+		summarizeBy: none
+		sourceColumn: CustomerState
+
+	column CustomerCountry
+		dataType: string
+		lineageTag: c6fe0064-b2ad-4684-9bf6-fbb92e2ba2a1
+		summarizeBy: none
+		sourceColumn: CustomerCountry
+
+	column Latitude
+		dataType: double
+		lineageTag: d5da2ab6-16b7-42e5-bb1c-d6c1c616727c
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: Latitude
+
+	column Longitude
+		dataType: double
+		lineageTag: cf80bd8a-c1e7-4af1-9060-2e2a48484529
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: Longitude
+
+	column FirstOrderDate
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 75181822-0dca-4957-abd4-9189dbbfcf97
+		summarizeBy: none
+		sourceColumn: FirstOrderDate
+
+	partition дКлієнти = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "d_customers.csv"), [Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"CustomerId", Int64.Type}, {"Segment", type text}, {"CustomerCity", type text}, {"CustomerState", type text}, {"CustomerCountry", type text}, {"Latitude", type number}, {"Longitude", type number}, {"FirstOrderDate", type date}}, "en-US")
+				in
+				    Typed
+

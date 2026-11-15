@@ -1,0 +1,203 @@
+/// Факт: 1 рядок = 1 позиція замовлення
+table fЗамовлення
+	lineageTag: 11719184-9833-47dc-bf7c-936e07433be5
+
+	column OrderItemId
+		dataType: int64
+		isHidden
+		lineageTag: 47d94a4d-5753-417b-97b1-418b49a4fe1d
+		summarizeBy: none
+		sourceColumn: OrderItemId
+
+	column OrderId
+		dataType: int64
+		isHidden
+		lineageTag: 6fb8a56a-fc1a-42e8-b3f3-d32370515f84
+		summarizeBy: none
+		sourceColumn: OrderId
+
+	column OrderDate
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: d94db63f-5cad-43dd-b368-6a40fc79c1a1
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+	column ShipDate
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 6798f197-af6b-4759-9c74-1d007a7965b9
+		summarizeBy: none
+		sourceColumn: ShipDate
+
+	column CustomerId
+		dataType: int64
+		isHidden
+		lineageTag: c7a0cc25-dc9a-49ef-adca-b4caa08890aa
+		summarizeBy: none
+		sourceColumn: CustomerId
+
+	column ProductId
+		dataType: int64
+		isHidden
+		lineageTag: 8e09eecd-62fb-4752-ae57-0baed25153af
+		summarizeBy: none
+		sourceColumn: ProductId
+
+	column GeoKey
+		dataType: int64
+		isHidden
+		lineageTag: 7bbb8558-5f0e-4276-b588-53d5b22a3dc4
+		summarizeBy: none
+		sourceColumn: GeoKey
+
+	column ShipModeKey
+		dataType: int64
+		isHidden
+		lineageTag: db4a1530-9438-4af0-9c2b-300394ef36ac
+		summarizeBy: none
+		sourceColumn: ShipModeKey
+
+	column PaymentType
+		dataType: string
+		lineageTag: 48a17355-3b16-4a00-b97b-00b867e8ca0b
+		summarizeBy: none
+		sourceColumn: PaymentType
+
+	column OrderStatus
+		dataType: string
+		lineageTag: 7c7eb65f-f57c-46fd-b074-3790b9a13d77
+		summarizeBy: none
+		sourceColumn: OrderStatus
+
+	column DeliveryStatus
+		dataType: string
+		lineageTag: af7a7fc0-8cf3-43ca-9775-d0b0cc1201ad
+		summarizeBy: none
+		sourceColumn: DeliveryStatus
+		sortByColumn: DeliveryStatusSort
+
+	column IsShipped
+		dataType: int64
+		isHidden
+		lineageTag: 34f80ecd-f90e-42a4-b7fb-d28cd3ad224b
+		summarizeBy: none
+		sourceColumn: IsShipped
+
+	column IsLate
+		dataType: int64
+		isHidden
+		lineageTag: 1da70bd8-3180-482e-8b8a-fb8caaa9d2b6
+		summarizeBy: none
+		sourceColumn: IsLate
+
+	column IsFraud
+		dataType: int64
+		isHidden
+		lineageTag: 84d2b150-4e7f-4cf9-8bbb-558f28f17abf
+		summarizeBy: none
+		sourceColumn: IsFraud
+
+	column IsCanceled
+		dataType: int64
+		isHidden
+		lineageTag: b6212db5-24ae-468d-ac35-3cb28601428d
+		summarizeBy: none
+		sourceColumn: IsCanceled
+
+	column DaysReal
+		dataType: int64
+		isHidden
+		lineageTag: c59af44b-689a-408f-8f47-be8dcf01d97a
+		summarizeBy: none
+		sourceColumn: DaysReal
+
+	column DaysScheduled
+		dataType: int64
+		isHidden
+		lineageTag: 09c204b7-c974-4c16-8b63-b8a518f6f2c8
+		summarizeBy: none
+		sourceColumn: DaysScheduled
+
+	column DelayDays
+		dataType: int64
+		isHidden
+		lineageTag: 7c383851-750c-47fe-8b08-efeee07ce2c8
+		summarizeBy: none
+		sourceColumn: DelayDays
+
+	column Quantity
+		dataType: int64
+		isHidden
+		lineageTag: e35e2c0d-0028-4c4b-8417-cc9c62fc0c05
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+	column UnitPrice
+		dataType: double
+		isHidden
+		lineageTag: 1956b69a-254c-43f6-b9cb-0afe46389c91
+		summarizeBy: none
+		sourceColumn: UnitPrice
+
+	column GrossSales
+		dataType: double
+		isHidden
+		lineageTag: af7041cd-44c1-4a0f-8c11-5fa13a040976
+		summarizeBy: sum
+		sourceColumn: GrossSales
+
+	column Discount
+		dataType: double
+		isHidden
+		lineageTag: 38119b3b-1a5c-4663-9240-f8d2e917fe4a
+		summarizeBy: sum
+		sourceColumn: Discount
+
+	column DiscountRate
+		dataType: double
+		isHidden
+		lineageTag: 1d6dec15-5ebc-4d2e-a5a0-7a0625c01d07
+		summarizeBy: none
+		sourceColumn: DiscountRate
+
+	column NetSales
+		dataType: double
+		isHidden
+		lineageTag: a5457e28-63f6-4260-96fe-14190bfc177d
+		summarizeBy: sum
+		sourceColumn: NetSales
+
+	column Profit
+		dataType: double
+		isHidden
+		lineageTag: e20365fc-aca9-49a3-84f6-6cfd6078f62a
+		summarizeBy: sum
+		sourceColumn: Profit
+
+	/// Порядок статусів доставки для легенди: запізнення, вчасно, достроково, скасовано
+	column DeliveryStatusSort
+		dataType: int64
+		isHidden
+		lineageTag: 76654913-0f9e-4b3d-ae25-bde93c2fb3c2
+		summarizeBy: none
+		sourceColumn: DeliveryStatusSort
+
+	partition fЗамовлення = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "f_orders.csv"), [Delimiter=",", Columns=25, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"OrderItemId", Int64.Type}, {"OrderId", Int64.Type}, {"OrderDate", type date}, {"ShipDate", type date}, {"CustomerId", Int64.Type}, {"ProductId", Int64.Type}, {"GeoKey", Int64.Type}, {"ShipModeKey", Int64.Type}, {"PaymentType", type text}, {"OrderStatus", type text}, {"DeliveryStatus", type text}, {"IsShipped", Int64.Type}, {"IsLate", Int64.Type}, {"IsFraud", Int64.Type}, {"IsCanceled", Int64.Type}, {"DaysReal", Int64.Type}, {"DaysScheduled", Int64.Type}, {"DelayDays", Int64.Type}, {"Quantity", Int64.Type}, {"UnitPrice", type number}, {"GrossSales", type number}, {"Discount", type number}, {"DiscountRate", type number}, {"NetSales", type number}, {"Profit", type number}}, "en-US"),
+				    StatusSort = Table.AddColumn(Typed, "DeliveryStatusSort", each
+				        if [DeliveryStatus] = "Late delivery" then 1
+				        else if [DeliveryStatus] = "Shipping on time" then 2
+				        else if [DeliveryStatus] = "Advance shipping" then 3
+				        else if [DeliveryStatus] = "Shipping canceled" then 4
+				        else 9, Int64.Type)
+				in
+				    StatusSort
+
